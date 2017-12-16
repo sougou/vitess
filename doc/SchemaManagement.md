@@ -177,3 +177,14 @@ impact of a potential change:
 
 If a schema change gets rejected because it affects too many rows, you can specify the flag `-allow_long_unavailability` to tell `ApplySchema` to skip this check.
 However, we do not recommend this. Instead, you should apply large schema changes by following the [schema swap process]({% link user-guide/schema-swap.md %}).
+
+### ApplyVSchema
+
+The <code>[ApplyVSchema]({% link reference/vtctl.md %}#applyvschema)</code>
+command applies the specified VSchema to the keyspace. The VSchema can be specified
+as a string or in a file.
+
+### RebuildVSchemaGraph
+
+The <code>[RebuildVSchemaGraph]({% link reference/vtctl.md %}#rebuildvschemagraph)</code>
+command propagates the global VSchema to a specific cell or the list of specified cells.
