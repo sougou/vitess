@@ -90,9 +90,15 @@ command displays the combined VSchema for a given cell.
 
 ## Changing your schema
 
-This section describes the <code>vtctl ApplySchema</code> command, which
-supports schema modifications. Vitess' schema modification functionality
-is designed the following goals in mind:
+This section describes the following commands:
+
+* <code>ApplySchema</code>
+* <code>ApplyVScheam</code>
+* <code>RebuildVSchemaGraph</code>
+
+### ApplySchema
+
+Vitess' schema modification functionality is designed the following goals in mind:
 
 * Enable simple updates that propagate to your entire fleet of servers.
 * Require minimal human interaction.
@@ -105,8 +111,6 @@ Note that, at this time, Vitess only supports
 that create, modify, or delete database tables.
 For instance, <code>ApplySchema</code> does not affect stored procedures
 or grants.
-
-### ApplySchema
 
 The <code>[ApplySchema]({% link reference/vtctl.md %}#applyschema)</code>
 command applies a schema change to the specified keyspace on every
