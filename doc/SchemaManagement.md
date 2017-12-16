@@ -1,7 +1,12 @@
-Your MySQL database schema lists the tables in your database and
-contains table definitions that explain how to create those tables.
-Table definitions identify table names, column names, column types,
-primary key information, and so forth.
+Uisng Vitess requires you to work with two different types of schemas:
+
+1. The MySQL database schema. This is the schema of the individual MySQL instances.
+2. The [VSchema]({% link user-guide/vschema.md %}), which describes all the keyspaces and how they're sharded.
+
+The workflow for the <code>VSchema</code> is as follows:
+
+1. Apply the VSchema for each keyspace using the <code>ApplyVschema</code> command. This saves the VSchemas in the global topo server.
+2. Execute <code>RebuildVSchemaGraph</code> for each cell (or all cells). This command propagates a denormalized version of the combined VSchema to all the specified cells. The main purpose for this propagation is to minimize the dependency of each cell from the global topology. The ability to push a change to only specific cells allows you to canary the change to make sure that it's good before deploying it everywhere.
 
 This document describes the <code>[vtctl]({% link reference/vtctl.md %})</code>
 commands that you can use to [review](#reviewing-your-schema) or
@@ -16,6 +21,8 @@ This section describes the following <code>vtctl</code> commands, which let you 
 * [GetSchema](#getschema)
 * [ValidateSchemaShard](#validateschemashard)
 * [ValidateSchemaKeyspace](#validateschemakeyspace)
+* [GetVSchema](#getvschema)
+* [GetSrvVSchema](#getsrvvschema)
 
 ### GetSchema
 
@@ -70,6 +77,16 @@ same schema as the master tablet in shard <code>0</code> for the
 ```
 ValidateSchemaKeyspace user
 ```
+
+### GetVSchema
+
+The <code>[GetVSchema]({% link reference/vtctl.md %}#getvschema)</code>
+command displays the global VSchema for the specified keyspace.
+
+### GetSrvVSchema
+
+The <code>[GetSrvVSchema]({% link reference/vtctl.md %}#getsrvvschema)</code>
+command displays the combined VSchema for a given cell.
 
 ## Changing your schema
 
