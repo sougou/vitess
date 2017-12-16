@@ -93,7 +93,7 @@ command displays the combined VSchema for a given cell.
 This section describes the following commands:
 
 * <code>ApplySchema</code>
-* <code>ApplyVScheam</code>
+* <code>ApplyVSchema</code>
 * <code>RebuildVSchemaGraph</code>
 
 ### ApplySchema
